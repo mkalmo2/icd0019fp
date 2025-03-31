@@ -1,24 +1,22 @@
 package fp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WithResource {
 
     @Test
     public void usesResourceInControlledManner() {
-        assertFalse(Resource.isOpen());
+        assertThat(Resource.isOpen()).isFalse();
 
         withResource(resource -> resource.write("hello!"));
 
-        assertFalse(Resource.isOpen());
+        assertThat(Resource.isOpen()).isFalse();
 
-        assertThat(Resource.getWrittenData(), is("hello!"));
+        assertThat(Resource.getWrittenData()).isEqualTo("hello!");
     }
 
     private void withResource(Consumer<Resource> consumer) {

@@ -1,13 +1,12 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CollectToMap {
 
@@ -20,25 +19,16 @@ public class CollectToMap {
 
         var map = records.stream().collect(
                 Collectors.toMap(
-                        each -> each.productId, // function that produces a key (from each item)
-                        each -> each.itemsSold, // function that produces a value
+                        each -> each.productId(), // function that produces a key (from each item)
+                        each -> each.itemsSold(), // function that produces a value
                         (a, b) -> a + b));  // what to do when there already is a value for this key
                                             // a is an existing value under the key
                                             // b is a value from the new item
 
-        assertThat(map, is(Map.of("p1", 30, "p2", 20)));
+        assertThat(map).isEqualTo(Map.of("p1", 30, "p2", 20));
     }
 
-    private static class SalesRecord {
 
-        public final String productId;
-        public final int itemsSold;
-
-        public SalesRecord(String productId, int itemsSold) {
-            this.productId = productId;
-            this.itemsSold = itemsSold;
-        }
-    }
 
 
 }

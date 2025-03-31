@@ -1,15 +1,19 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Sorting {
+
+    List<SalesRecord> records = List.of(
+            new SalesRecord("p2", 10),
+            new SalesRecord("p1", 30),
+            new SalesRecord("p3", 20));
 
     @Test
     public void sortingByNaturalOrder() {
@@ -19,33 +23,40 @@ public class Sorting {
                 .sorted()
                 .toList();
 
-        assertThat(sorted, is(List.of(0, 2, 3, 5)));
+        assertThat(sorted).isEqualTo(List.of(0, 2, 3, 5));
     }
 
     @Test
     public void sortingByCustomCriteria() {
-        List<String> numbers = List.of("123", "1", "23");
-
-        List<String> sorted = numbers.stream()
-                .sorted(Comparator.comparing(each -> each.length()))
+        List<String> sorted = records.stream()
+                .sorted(Comparator.comparing(each -> each.productId()))
+                .map(Object::toString)
                 .toList();
 
-        assertThat(sorted, is(List.of("1", "23", "123")));
+        // Comparator.comparing(<function that extracts sorting key>)
+
+        assertThat(sorted).containsExactly("(p1; 30)", "(p2; 10)", "(p3; 20)");
+
+        sorted = records.stream()
+                .sorted(Comparator.comparing(each -> each.itemsSold()))
+                .map(Object::toString)
+                .toList();
+
+        assertThat(sorted).containsExactly("(p2; 10)", "(p3; 20)", "(p1; 30)");
     }
 
     @Test
     public void sortingByCustomCriteriaWithProvidedUtilities() {
-        List<String> numbers = List.of("123", "1", "23");
+        List<String> numbers = List.of("123", "31", "23");
 
         List<String> sorted = numbers.stream()
                 .sorted(Collections.reverseOrder(
-                            Comparator.comparing(each -> each.length())))
+                            Comparator.comparing(each -> each.charAt(0))))
                 .toList();
 
-        // Comparator.comparing() specifies sorting criteria
-        // wrapping it with Collections.reverseOrder reverses the order
+        // wrapping Comparator with Collections.reverseOrder reverses the order
 
-        assertThat(sorted, is(List.of("123", "23", "1")));
+        assertThat(sorted).containsExactly("31", "23", "123");
     }
 
 }

@@ -22,7 +22,7 @@ public class Main {
 
         return lines.stream()
                 .map(line -> line.split(", "))
-                .map(Arrays::asList)
+                .map(List::of)
                 .map(Main::toNumberList)
                 .toList();
     }

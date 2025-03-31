@@ -1,6 +1,6 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
@@ -16,8 +16,11 @@ public class ReadEntriesFromMap {
                 .forEach(System.out::println);
     }
 
-    private class MyEntry { // Not used here. Just for illustration.
-        // entrySet() produces a list with similar items.
+
+    // Not used here. Just for illustration.
+    // Map.entrySet() produces a list with similar items.
+
+    private class MyEntry {
         // getKey()
         // getValue()
         // equals()

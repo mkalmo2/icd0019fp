@@ -1,11 +1,10 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Sublist {
 
@@ -18,7 +17,7 @@ public class Sublist {
                 .limit(3)
                 .toList();
 
-        assertThat(sublist, is(List.of(2, 3, 4)));
+        assertThat(sublist).containsExactly(2, 3, 4);
     }
 }
 

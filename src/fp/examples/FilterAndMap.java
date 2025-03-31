@@ -1,11 +1,10 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilterAndMap {
 
@@ -18,7 +17,7 @@ public class FilterAndMap {
                 .map(x -> x * x)
                 .toList();
 
-        assertThat(result, is(List.of(25, 0, 4)));
+        assertThat(result).isEqualTo(List.of(25, 0, 4));
     }
 
 }

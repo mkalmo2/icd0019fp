@@ -1,13 +1,11 @@
 package fp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Map {
 
@@ -16,7 +14,7 @@ public class Map {
 
         var numbers = List.of(1, 2, 3, 4);
 
-        assertThat(map(numbers, x -> x + 1), is(List.of(2, 3, 4, 5)));
+        assertThat(map(numbers, x -> x + 1)).containsExactly(2, 3, 4, 5);
 
     }
 

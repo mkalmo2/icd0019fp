@@ -1,12 +1,10 @@
 package fp.examples;
 
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Sum {
 
@@ -15,10 +13,10 @@ public class Sum {
         List<Integer> numbers = List.of(1, 2, 3, 4);
 
         double sum = numbers.stream()
-                .mapToDouble(each -> each)
+                .mapToInt(each -> each)
                 .sum();
 
-        assertThat(sum, is(Matchers.closeTo(10, 0.1)));
+        assertThat(sum).isEqualTo(10);
     }
 }
 

@@ -1,11 +1,10 @@
 package fp.examples;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FlattenListOfLists {
 
@@ -21,7 +20,7 @@ public class FlattenListOfLists {
                 .flatMap(eachList -> eachList.stream())
                 .toList();
 
-        assertThat(flattened, is(List.of(0, 1, 2, 3, 4, 5)));
+        assertThat(flattened).isEqualTo(List.of(0, 1, 2, 3, 4, 5));
     }
 }
 
