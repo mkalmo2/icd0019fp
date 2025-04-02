@@ -20,7 +20,7 @@ public class Sorting {
         List<Integer> numbers = List.of(5, 2, 0, 3);
 
         List<Integer> sorted = numbers.stream()
-                .sorted()
+                .sorted() // natural order
                 .toList();
 
         assertThat(sorted).isEqualTo(List.of(0, 2, 3, 5));
@@ -29,20 +29,27 @@ public class Sorting {
     @Test
     public void sortingByCustomCriteria() {
         List<String> sorted = records.stream()
-                .sorted(Comparator.comparing(each -> each.productId()))
+                .sorted((a, b) -> a.itemsSold() - b.itemsSold())
                 .map(Object::toString)
                 .toList();
 
-        // Comparator.comparing(<function that extracts sorting key>)
-
-        assertThat(sorted).containsExactly("(p1; 30)", "(p2; 10)", "(p3; 20)");
+        assertThat(sorted).containsExactly("(p2; 10)", "(p3; 20)", "(p1; 30)");
 
         sorted = records.stream()
                 .sorted(Comparator.comparing(each -> each.itemsSold()))
                 .map(Object::toString)
                 .toList();
 
+        // Comparator.comparing(<function that extracts sorting key>)
+
         assertThat(sorted).containsExactly("(p2; 10)", "(p3; 20)", "(p1; 30)");
+
+        sorted = records.stream()
+                .sorted(Comparator.comparing(each -> each.productId()))
+                .map(Object::toString)
+                .toList();
+
+        assertThat(sorted).containsExactly("(p1; 30)", "(p2; 10)", "(p3; 20)");
     }
 
     @Test
