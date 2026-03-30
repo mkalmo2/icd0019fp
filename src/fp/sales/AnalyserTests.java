@@ -28,8 +28,8 @@ public class AnalyserTests {
     @Test
     public void findsSalesBetweenDates() {
         Double salesBetween = analyser.getSalesBetween(
-                LocalDate.parse("2024-01-01"),
-                LocalDate.parse("2024-03-31"));
+                LocalDate.parse("2025-01-01"),
+                LocalDate.parse("2025-03-31"));
 
         assertThat(salesBetween).isCloseTo(40828.25, within(0.01));
     }
