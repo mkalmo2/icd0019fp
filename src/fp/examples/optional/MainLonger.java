@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
-public class Main {
+public class MainLonger {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        MainLonger main = new MainLonger();
 
         System.out.println(main.getLanguageUsingFlatmap(3L));
     }
